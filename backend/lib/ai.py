@@ -1,7 +1,7 @@
-# MAINTAINER NOTE (2026-09-27): PROVIDER FAILURES: _retry records the provider/task label without storing SDK exception bodies or secrets. HTTP 429 alone does not prove exhausted credits; _classify separates explicit quota evidence from ambiguous rate/quota limits. No silent provider fallback. See docs/MAINTAINER_HANDOFF.md.
+# MAINTAINER NOTE (2026-09-27): PROVIDER FAILURES: _retry records the provider/task label without storing SDK exception bodies or secrets. HTTP 429 alone does not prove exhausted credits; _classify separates explicit quota evidence from ambiguous rate/quota limits. No silent provider fallback.
 """Production AI layer — the owner's OWN Google Gemini + OpenAI keys via the official SDKs.
 
-No platform-provided key. No automatic fallback to any other provider and no mock/placeholder
+No automatic fallback to any other provider and no mock/placeholder
 content: every failure raises AIError so the workflow can stop the article safely, surface the
 exact non-sensitive error, and allow a controlled retry after the problem is fixed.
 

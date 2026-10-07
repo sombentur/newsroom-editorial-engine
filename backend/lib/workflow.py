@@ -1,4 +1,4 @@
-# MAINTAINER NOTE (2026-09-27): STATE TRANSITIONS: This module owns research -> writing -> image -> WordPress gates. held_review is a legacy shared state for BOTH editorial holds and technical failures; inspect held_reason and ai_failure before offering approval. Never infer that every hold can be approved. See docs/MAINTAINER_HANDOFF.md.
+# MAINTAINER NOTE (2026-09-27): STATE TRANSITIONS: This module owns research -> writing -> image -> WordPress gates. held_review is a legacy shared state for BOTH editorial holds and technical failures; inspect held_reason and ai_failure before offering approval. Never infer that every hold can be approved.
 """Article state-machine engine: select → research → validate → generate → quality gate
 → image → wordpress draft/schedule/publish → verify. Fail closed; no simulated writes.
 """

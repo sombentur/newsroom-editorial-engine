@@ -1,8 +1,8 @@
-# MAINTAINER NOTE (2026-09-27): AUTOMATIC ADVANCEMENT (sequential, one article at a time, alternating sites): Check mode, pause/Stop All, per-site settings, quota/timezone and active manual tasks before advancing. Browser attention can block browser jobs even while this scheduler is healthy. Publishing gates remain separate from research approval. See docs/MAINTAINER_HANDOFF.md.
+# MAINTAINER NOTE (2026-09-27): AUTOMATIC ADVANCEMENT (sequential, one article at a time, alternating sites): Check mode, pause/Stop All, per-site settings, quota/timezone and active manual tasks before advancing. Browser attention can block browser jobs even while this scheduler is healthy. Publishing gates remain separate from research approval.
 """Background scheduler: daily discovery and strictly sequential article production.
 
 One article at a time goes from Deep Research to WordPress before the next starts, alternating
-sites (Kannada site, English site, Kannada site, ...); only the next article's Deep Research starts early, once the current
+sites (Kannadiga, Human, Kannadiga, ...); only the next article's Deep Research starts early, once the current
 article is on its thumbnail (owner rule, 27 Sep 2026). Gated by system_settings.scheduler_enabled (default off)
 so it never uses AI or publishes without an explicit opt-in.
 """
@@ -255,7 +255,7 @@ async def _publish_ready(site: dict, system: dict) -> None:
 
 
 def _site_order(sites: list[dict], last_key: str | None) -> list[dict]:
-    """Alternate sites: whichever did not go last goes next; Kannada site starts a fresh sequence."""
+    """Alternate sites: whichever did not go last goes next; Kannadiga starts a fresh sequence."""
     ordered = sorted(sites, key=lambda s: s["key"] != "kannadiga")
     return sorted(ordered, key=lambda s: s["key"] == last_key)
 
@@ -468,7 +468,7 @@ async def _research_ahead(sites: list[dict], system: dict) -> None:
 
 
 async def _advance_sequence(sites: list[dict], system: dict) -> None:
-    """Strictly one article at a time, alternating sites: Kannada site, English site, Kannada site, English site ...
+    """Strictly one article at a time, alternating sites: Kannadiga, Human, Kannadiga, Human ...
 
     The current article keeps the turn until WordPress has it (or it is rejected). While it is held for the
     editor or waits for WordPress, nothing else starts - except the next article's research, once the current

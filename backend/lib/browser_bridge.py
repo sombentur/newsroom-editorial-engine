@@ -1,4 +1,4 @@
-# MAINTAINER NOTE (2026-09-27): BROWSER BRIDGE: Admin/session routes manage pairing and jobs; bearer-authenticated worker routes exchange bounded observations/actions/results. Browser connectivity is NOT proof a generation succeeded. Completed results require content validation. See docs/MAINTAINER_HANDOFF.md for the research-plan capture incident and recovery limits.
+# MAINTAINER NOTE (2026-09-27): BROWSER BRIDGE: Admin/session routes manage pairing and jobs; bearer-authenticated worker routes exchange bounded observations/actions/results. Browser connectivity is NOT proof a generation succeeded. Completed results require content validation.
 """Local, paired Chrome worker. No cookies, passwords or arbitrary commands cross the bridge."""
 import asyncio
 import hashlib

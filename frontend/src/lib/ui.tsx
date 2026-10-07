@@ -74,10 +74,10 @@ export function StageBadge({ stage, heldReason }: { stage: string; heldReason?: 
   );
 }
 
-// Site colours: Kannada site violet, English site cyan. Never red or amber: those mean danger / held.
+// Site colours: the Kannada site violet, the English site cyan. Never red or amber: those mean danger / held.
 export const SITE_META = {
-  kannadiga: { name: "Kannada site", short: "Kannada", native: "ಕನ್ನಡ", language: "ಕನ್ನಡ · Kannada" },
-  human: { name: "English site", short: "English", native: "English", language: "English" },
+  kannadiga: { name: "Kannada Edition", short: "Kannada", native: "ಕನ್ನಡ", language: "ಕನ್ನಡ · Kannada" },
+  human: { name: "English Edition", short: "English", native: "English", language: "English" },
 } as const;
 export type SiteFilter = "all" | "kannadiga" | "human";
 
@@ -128,6 +128,7 @@ export function SiteSwitch({ value, onChange, testidPrefix, allLabel = "All site
               <span className={cn("h-2 w-2 shrink-0 rounded-full", selected ? "bg-white" : kn ? "bg-violet-600" : "bg-cyan-600")} />
             )}
             <span className="truncate">{o.label}</span>
+            {kn && <span className="hidden font-kannada text-[12px] leading-none opacity-80 sm:inline">ಕನ್ನಡ</span>}
           </button>
         );
       })}

@@ -1,4 +1,4 @@
-// MAINTAINER NOTE (2026-09-27): WORKBENCH UI: Status filters constrain bulk actions to visible eligible items; hidden/terminal/running work must not be accidentally approved. Go ahead applies to research warnings only. Browser failures need job recovery, not editorial approval. Independent desktop scroll panels preserve list position. See docs/MAINTAINER_HANDOFF.md.
+// MAINTAINER NOTE (2026-09-27): WORKBENCH UI: Status filters constrain bulk actions to visible eligible items; hidden/terminal/running work must not be accidentally approved. Go ahead applies to research warnings only. Browser failures need job recovery, not editorial approval. Independent desktop scroll panels preserve list position.
 import DOMPurify from "dompurify";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -225,13 +225,11 @@ function AutoResearchSwitch() {
 function ArticleContext({ a }: { a: Article }) {
   const kn = a.site_key === "kannadiga";
   const site = SITE_META[kn ? "kannadiga" : "human"];
-  const { data: stats } = useStats();
-  const siteName = stats?.sites.find((s) => s.key === a.site_key)?.name ?? site.name;
   const live = a.wp?.status === "publish";
   return (
     <header data-site={kn ? "kannadiga" : "human"} className="site-ribbon" data-testid="article-context">
       <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-        <span className="inline-flex items-center gap-2 text-[13px] font-semibold text-slate-900"><span className="site-dot" aria-hidden="true" />{siteName}</span>
+        <span className="inline-flex items-center gap-2 text-[13px] font-semibold text-slate-900"><span className="site-dot" aria-hidden="true" />{site.name}</span>
         <span className="text-xs text-slate-500">{site.language}</span>
         <span className="ml-auto flex flex-wrap items-center gap-2">
           <StageBadge stage={a.stage} heldReason={a.held_reason} />

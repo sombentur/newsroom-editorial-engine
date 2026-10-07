@@ -1,4 +1,4 @@
-// MAINTAINER NOTE (2026-09-27): TAB OWNERSHIP: Local storage (kept across extension reloads; tab ids are revalidated) tracks extension-created work tabs, not personal tabs. Extension reload/update can invalidate old observers and tab ownership state. A queued capture_existing job uses its saved capture_tab_id to recover the original report; never substitute a blank/new tab silently. See ../docs/MAINTAINER_HANDOFF.md.
+// MAINTAINER NOTE (2026-09-27): TAB OWNERSHIP: Local storage (kept across extension reloads; tab ids are revalidated) tracks extension-created work tabs, not personal tabs. Extension reload/update can invalidate old observers and tab ownership state. A queued capture_existing job uses its saved capture_tab_id to recover the original report; never substitute a blank/new tab silently.
 import {assertJobTab} from './policy.mjs';
 import {isMissingObserver,reconnectObserver,withTimeout} from './observer.mjs';
 // A provider page that failed to load, with its own Reload button (a person would press it; never Sign out).

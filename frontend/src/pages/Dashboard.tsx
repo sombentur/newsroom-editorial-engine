@@ -191,7 +191,7 @@ export default function Dashboard() {
               </a>
             </>
           ) : (
-            <span className="text-slate-600">Idle · next turn: {stats?.next_site === "human" ? "the English site" : "the Kannada site"}</span>
+            <span className="text-slate-600">Idle · next turn: {stats?.next_site === "human" ? "English edition" : "Kannada edition"}</span>
           )}
           {stats?.next_article && (
             <div className="flex min-w-0 basis-full items-center gap-2" data-testid="next-article">

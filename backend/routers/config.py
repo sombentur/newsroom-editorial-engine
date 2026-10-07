@@ -1,5 +1,7 @@
 """Config & read endpoints: system settings, sites, prompts, health, audit, dashboard stats."""
 
+import re
+from urllib.parse import urlsplit
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
@@ -73,19 +75,26 @@ async def update_site(key: str, body: SiteUpdate):
     if not doc:
         raise HTTPException(404, "site not found")
     patch = body.model_dump(exclude_none=True, exclude={"wp_app_password", "revoke_wp_password"})
-    import re as _re
-    expected_domain = (patch.get("domain") or doc.get("domain") or "").strip().lower()
-    expected_domain = expected_domain.removeprefix("https://").removeprefix("http://").strip("/")
-    if "domain" in patch:
-        if not _re.fullmatch(r"[a-z0-9.-]+\.[a-z]{2,}", expected_domain):
-            raise HTTPException(422, "Enter the website's domain only, for example news.example.com.")
-        patch["domain"] = expected_domain
+    # The site's domain is whatever the owner configures; the WordPress base URL must stay on it.
+    domain = str(patch.get("domain", doc.get("domain") or "")).strip().lower().removeprefix("www.")
+    if "domain" in patch and not re.fullmatch(r"(?=.{1,253}$)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}", domain):
+        raise HTTPException(422, "Enter the website's domain name, for example news.example.com.")
+    if patch.get("wp_base_url"):
+        try:
+            host = (urlsplit(patch["wp_base_url"].strip()).hostname or "").lower().removeprefix("www.")
+        except ValueError:
+            host = ""
+        if host and ("domain" not in patch or not domain):
+            domain = host  # the base URL defines the domain when none was set
+    if domain != (doc.get("domain") or ""):
+        patch["domain"] = domain
+    expected_domain = domain
     system = await db.system_settings.find_one({"id": "system"}) or {}
     if patch.get("auto_publish") is True and (RuntimeSafety.from_env().dry_run or system.get("repair_lock", True)):
         raise HTTPException(409, "Disable dry-run and release the repair lock before enabling automatic publishing.")
     try:
         if "wp_base_url" in patch:
-            patch["wp_base_url"] = normalize_base_url(patch["wp_base_url"], expected_domain)
+            patch["wp_base_url"] = normalize_base_url(patch["wp_base_url"], expected_domain) if expected_domain else "" if expected_domain else ""
         if "timezone" in patch:
             ZoneInfo(patch["timezone"])
         minimum = patch.get("word_count_min", doc["word_count_min"])

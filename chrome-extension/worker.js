@@ -1,4 +1,4 @@
-// MAINTAINER NOTE (2026-09-27): CONTROLLER LOOP: Owns dedicated tabs, exactly-once prompt submission and saved active-job state. One active job per work tab (research lane and image/SEO lane); an attention job pauses only its own lane. Do not auto-resubmit an uncertain Send. Read ../docs/MAINTAINER_HANDOFF.md before changing recovery.
+// MAINTAINER NOTE (2026-09-27): CONTROLLER LOOP: Owns dedicated tabs, exactly-once prompt submission and saved active-job state. One active job per work tab (research lane and image/SEO lane); an attention job pauses only its own lane. Do not auto-resubmit an uncertain Send.
 import {exportAction,validateCopiedReport} from './research-export.mjs';
 import {assertJobTab,validateAction} from './policy.mjs';
 import {Workspace} from './workspace.mjs';

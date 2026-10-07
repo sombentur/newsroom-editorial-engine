@@ -1,4 +1,4 @@
-// MAINTAINER NOTE (2026-09-27): LIVE PAGE ADAPTER: Observe current DOM controls; prepare revalidates identity before input. Existing tabs may need refresh after extension reload to install this observer. Clipboard reads belong only to the explicit Gemini Copy content path, after its UI confirmation. See ../docs/MAINTAINER_HANDOFF.md.
+// MAINTAINER NOTE (2026-09-27): LIVE PAGE ADAPTER: Observe current DOM controls; prepare revalidates identity before input. Existing tabs may need refresh after extension reload to install this observer. Clipboard reads belong only to the explicit Gemini Copy content path, after its UI confirmation.
 // Observes live controls; the server selects an element ID, never JavaScript.
 (() => {
   let current = null;

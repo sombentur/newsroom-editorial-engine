@@ -1,4 +1,4 @@
-// MAINTAINER NOTE (2026-09-27): BROWSER STATUS UI: Attached/page-controls-ready does not verify account quota, subscription or final generation. Continue is currently in the Chrome extension popup; Stop this browser job is also exposed here. Distinguish installed version, heartbeat, workspace readiness and job state. See docs/MAINTAINER_HANDOFF.md.
+// MAINTAINER NOTE (2026-09-27): BROWSER STATUS UI: Attached/page-controls-ready does not verify account quota, subscription or final generation. Continue is currently in the Chrome extension popup; Stop this browser job is also exposed here. Distinguish installed version, heartbeat, workspace readiness and job state.
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { apiGet, apiPost } from '@/lib/api';

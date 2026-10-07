@@ -1,4 +1,4 @@
-// MAINTAINER NOTE (2026-09-27): REPORT RECOVERY: Select only observed Share & Export and Copy content(s) controls. Reject obvious plans, short output and missing requested Kannada. These are basic checks, not proof of factual correctness or complete citations. Site labels/toasts may change; live export must be verified. See ../docs/MAINTAINER_HANDOFF.md.
+// MAINTAINER NOTE (2026-09-27): REPORT RECOVERY: Select only observed Share & Export and Copy content(s) controls. Reject obvious plans, short output and missing requested Kannada. These are basic checks, not proof of factual correctness or complete citations. Site labels/toasts may change; live export must be verified.
 // Gemini buttons often include Material icon ligatures in their text (e.g. "keyboard_arrow_down",
 // "content_copy"); strip them so labels like "Share & Export" still match.
 export const controlLabel=e=>String(e?.name||'').replace(/\b[a-z]+(?:_[a-z]+)+\b/g,' ').replace(/\s+/g,' ').trim();

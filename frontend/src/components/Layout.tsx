@@ -1,4 +1,4 @@
-// MAINTAINER NOTE (2026-09-27): GLOBAL ALERTS: /ai-alerts polls active held articles. Older records lack original provider identity, so their banner labels the current configuration explicitly. Do not present inferred provider identity or an ambiguous 429 as confirmed exhausted credits. See docs/MAINTAINER_HANDOFF.md.
+// MAINTAINER NOTE (2026-09-27): GLOBAL ALERTS: /ai-alerts polls active held articles. Older records lack original provider identity, so their banner labels the current configuration explicitly. Do not present inferred provider identity or an ambiguous 429 as confirmed exhausted credits.
 import { useIsMutating, useQuery } from "@tanstack/react-query";
 import { apiGet } from "@/lib/api";
 import { useEffect, useState, type ReactNode } from "react";
@@ -232,7 +232,7 @@ function SitesPanel({ sites }: { sites: SiteStat[] }) {
               <div className="mb-1.5 flex items-center justify-between gap-2 text-xs">
                 <span className="flex min-w-0 items-center gap-1.5">
                   <span className={cn("h-2 w-2 shrink-0 rounded-full", kn ? "bg-violet-600" : "bg-cyan-600")} aria-hidden="true" />
-                  <span className={cn("truncate font-medium text-slate-800", kn && "font-kannada leading-none")}>{s.name}</span>
+                  <span className={cn("truncate font-medium text-slate-800", kn && "font-kannada leading-none")}>{kn ? "ಕನ್ನಡ" : "English"}</span>
                   <span className={cn("rounded-full border px-1.5 text-[9.5px] font-semibold uppercase leading-4 tracking-wide", tone)}
                     title={s.paused ? `${s.name} is paused` : s.auto_publish ? "Automatic publishing is on" : "Automatic publishing is off"}>{state}</span>
                 </span>

@@ -43,7 +43,6 @@ function SiteForm({ site }: { site: Site }) {
   const update = useUpdateSite();
   const test = useConnectionTest();
   const [f, setF] = useState({
-    name: site.name, domain: site.domain,
     wp_base_url: site.wp_base_url, wp_username: site.wp_username, wp_app_password: "",
     author: site.author, timezone: site.timezone, seo_plugin: site.seo_plugin,
     word_count_min: site.word_count_min, word_count_max: site.word_count_max,
@@ -51,7 +50,7 @@ function SiteForm({ site }: { site: Site }) {
     alert_channel: site.alert_channel,
   });
   useEffect(() => {
-    setF((p) => ({ ...p, name: site.name, domain: site.domain, wp_base_url: site.wp_base_url, wp_username: site.wp_username, author: site.author,
+    setF((p) => ({ ...p, wp_base_url: site.wp_base_url, wp_username: site.wp_username, author: site.author,
       timezone: site.timezone, seo_plugin: site.seo_plugin, word_count_min: site.word_count_min,
       word_count_max: site.word_count_max, publish_times: site.publish_times.join(", "),
       categories: site.categories.join(", "), alert_channel: site.alert_channel }));
@@ -61,7 +60,6 @@ function SiteForm({ site }: { site: Site }) {
 
   const save = () => {
     const body: Record<string, unknown> = {
-      name: f.name, domain: f.domain,
       wp_base_url: f.wp_base_url, wp_username: f.wp_username, author: f.author, timezone: f.timezone,
       seo_plugin: f.seo_plugin, word_count_min: Number(f.word_count_min), word_count_max: Number(f.word_count_max),
       publish_times: f.publish_times.split(",").map((s) => s.trim()).filter(Boolean),
@@ -100,8 +98,6 @@ function SiteForm({ site }: { site: Site }) {
         <Card className="border-slate-200 bg-slate-100/40 p-4">
           <div className="mb-3 flex items-center gap-2"><Lock className="h-4 w-4 text-amber-600" /><SectionLabel>WordPress (Application Password)</SectionLabel></div>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <Field label="Website name"><Input value={f.name} onChange={(e) => set("name", e.target.value)} placeholder="My News Site" data-testid={`site-name-${site.key}`} className="bg-slate-50/60" /></Field>
-            <Field label="Domain"><Input value={f.domain} onChange={(e) => set("domain", e.target.value)} placeholder="news.example.com" data-testid={`site-domain-${site.key}`} className="bg-slate-50/60" /></Field>
             <Field label="WordPress Base URL"><Input value={f.wp_base_url} onChange={(e) => set("wp_base_url", e.target.value)} placeholder={`https://${site.domain}`} data-testid={`wp-url-${site.key}`} className="bg-slate-50/60" /></Field>
             <Field label="WP Username"><Input value={f.wp_username} onChange={(e) => set("wp_username", e.target.value)} placeholder="editorial-bot" data-testid={`wp-user-${site.key}`} className="bg-slate-50/60" /></Field>
             <Field label={`Application Password ${site.has_wp_password ? "(saved — leave blank to keep)" : ""}`}>
@@ -109,7 +105,7 @@ function SiteForm({ site }: { site: Site }) {
             </Field>
             <Field label="Author"><Input value={f.author} onChange={(e) => set("author", e.target.value)} data-testid={`wp-author-${site.key}`} className="bg-slate-50/60" /></Field>
           </div>
-          <p className="mt-2 text-[11px] text-slate-500">Use a dedicated least-privilege user + Application Password. Your main WordPress login password is never requested or stored.</p>
+          <p className="mt-2 text-[11px] text-slate-500">Use a dedicated least-privilege user + Application Password. Your hosting or WordPress login password is never requested or stored.</p>
         </Card>
 
         <Card className="border-slate-200 bg-slate-100/40 p-4">

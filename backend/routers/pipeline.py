@@ -1,4 +1,4 @@
-# MAINTAINER NOTE (2026-09-27): WORKFLOW ENTRY POINTS: Research/Retry/Go ahead start background work; publication is a separate guarded action. Research approval is an explicit editor override, not an automatic validation pass. Preserve its original warnings and audit history. See docs/MAINTAINER_HANDOFF.md.
+# MAINTAINER NOTE (2026-09-27): WORKFLOW ENTRY POINTS: Research/Retry/Go ahead start background work; publication is a separate guarded action. Research approval is an explicit editor override, not an automatic validation pass. Preserve its original warnings and audit history.
 """Pipeline endpoints: discovery, topic queue, and the per-article state machine actions."""
 
 import asyncio

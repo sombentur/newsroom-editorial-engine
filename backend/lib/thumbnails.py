@@ -24,14 +24,14 @@ def validate_headlines(lines, language: str) -> list[str]:
     if any(len(s) > 90 or "\n" in s for s in lines):
         raise ValueError("Keep each thumbnail headline to one short line (90 characters maximum).")
     if language == "kn" and any(re.search(r"[A-Za-z]", s) or not re.search(r"[\u0c80-\u0cff]", s) for s in lines):
-        raise ValueError("Kannada-site headlines must use Kannada script without English words.")
+        raise ValueError("Kannadiga headlines must use Kannada script without English words.")
     if language == "kn":
         # Letters, vowel signs or digits of another script (seen: Gujarati letters inside a Kannada word). The lines
         # become the thumbnail text and the post title, so they must be clean Kannada.
         foreign = sorted({c for s in lines for c in s if unicodedata.category(c)[0] in "LMN"
                           and not ("\u0c80" <= c <= "\u0cff" or c.isascii())})
         if foreign:
-            raise ValueError("Kannada-site headlines must use Kannada script only; found letters from another script: "
+            raise ValueError("Kannadiga headlines must use Kannada script only; found letters from another script: "
                              + " ".join(f"{c} (U+{ord(c):04X})" for c in foreign))
     return lines
 

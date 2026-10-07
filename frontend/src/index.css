@@ -17,7 +17,7 @@
  *   navy-*   brand navy: primary buttons, selected states, links (800 is the logo navy)
  *   sky-*    informational tint of the navy: selected filters, info panels, in-progress stages
  *   amber-*  brand amber (500 is the logo amber); also the held / needs-attention tone
- * Site identity stays violet (Kannada site) and cyan (Human); rose/red means danger only.
+ * Site identity stays violet (Kannadiga) and cyan (Human); rose/red means danger only.
  * Text steps are tuned for WCAG AA on white and on the ivory canvas (slate-400+, sky-500+, amber-700+).
  */
 @theme {

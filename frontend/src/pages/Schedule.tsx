@@ -11,7 +11,7 @@ import { EmptyState, fmtTime, SectionLabel, SiteBadge, StageBadge } from "@/lib/
 import type { Article } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-// The English site publishes on New York hours: show that time beside the local one.
+// Each site publishes in its own timezone: show that time beside the local one.
 function siteTime(iso: string, timeZone: string): string {
   try { return new Date(iso).toLocaleTimeString(undefined, { timeZone, hour: "2-digit", minute: "2-digit" }); } catch { return ""; }
 }
@@ -25,7 +25,7 @@ function Row({ a }: { a: Article }) {
   const live = a.wp?.status === "publish";
 
   const publishNow = async () => {
-    const site = a.site_key === "kannadiga" ? "the Kannada site" : "the English site";
+    const site = a.site_key === "kannadiga" ? "the Kannada edition" : "the English edition";
     const waiting = a.stage === "scheduled" ? " It will not wait for its scheduled slot." : "";
     if (!window.confirm(`Publish “${a.article?.headline ?? a.topic_snapshot.topic}” on ${site} now?${waiting}`)) return;
     setPublishing(true);

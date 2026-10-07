@@ -1,4 +1,4 @@
-# MAINTAINER NOTE (2026-09-27): ENTRY POINT: FastAPI startup initializes Mongo indexes, seed/config safety, approved-research recovery, then the scheduler. See docs/MAINTAINER_HANDOFF.md before changing startup or recovery; restarting can interrupt in-memory tasks.
+# MAINTAINER NOTE (2026-09-27): ENTRY POINT: FastAPI startup initializes Mongo indexes, seed/config safety, approved-research recovery, then the scheduler. Take care when changing startup or recovery: restarting can interrupt in-memory tasks.
 """Local and self-hosted entry point with a safety-gated background scheduler."""
 import asyncio
 import logging

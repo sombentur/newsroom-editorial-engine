@@ -45,15 +45,15 @@ export default function AuthGate({ children }: { children: ReactNode }) {
               <div className="flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-[0.18em] text-navy-200">
                 <span className="h-2 w-2 rounded-full bg-violet-400" aria-hidden="true" />Kannada
               </div>
-              <div className="mt-2 font-kannada text-lg leading-snug text-white">ಕನ್ನಡ ಸುದ್ದಿ ತಾಣ</div>
-              <div className="mt-0.5 text-xs text-navy-200">Your Kannada-language site</div>
+              <div className="mt-2 font-kannada text-lg leading-snug text-white">ಕನ್ನಡ ಆವೃತ್ತಿ</div>
+              <div className="mt-0.5 text-xs text-navy-200">Kannada edition</div>
             </div>
             <div className="rounded-2xl border border-white/15 bg-white/[0.07] p-4 shadow-[inset_0_1px_0_rgb(255_255_255/0.12)] backdrop-blur-md">
               <div className="flex items-center gap-2 text-[10.5px] font-semibold uppercase tracking-[0.18em] text-navy-200">
                 <span className="h-2 w-2 rounded-full bg-cyan-300" aria-hidden="true" />English
               </div>
-              <div className="mt-2 text-lg font-medium leading-snug text-white">English news site</div>
-              <div className="mt-0.5 text-xs text-navy-200">Your English-language site</div>
+              <div className="mt-2 text-lg font-medium leading-snug text-white">English edition</div>
+              <div className="mt-0.5 text-xs text-navy-200">Any English-reading audience</div>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-# MAINTAINER NOTE (2026-09-27): PAGE PLANNER: Model proposals must pass validate_decision and extension policy checks. A visible research plan, absent Stop button, or model assertion is not sufficient evidence of a final report. Gemini collection now delegates to the extension export path. See docs/MAINTAINER_HANDOFF.md.
+# MAINTAINER NOTE (2026-09-27): PAGE PLANNER: Model proposals must pass validate_decision and extension policy checks. A visible research plan, absent Stop button, or model assertion is not sufficient evidence of a final report. Gemini collection now delegates to the extension export path.
 """Bounded page-observation planner; model outputs are data, never executable code."""
 import asyncio
 import base64

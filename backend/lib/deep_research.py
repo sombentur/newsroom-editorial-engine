@@ -1,4 +1,4 @@
-# MAINTAINER NOTE (2026-09-27): PERSISTENT RESEARCH: Resume the stored provider job instead of resubmitting a paid request. Browser-generated research and direct API research have different failure paths; investigate the selected provider and stored job before retrying. See docs/MAINTAINER_HANDOFF.md.
+# MAINTAINER NOTE (2026-09-27): PERSISTENT RESEARCH: Resume the stored provider job instead of resubmitting a paid request. Browser-generated research and direct API research have different failure paths; investigate the selected provider and stored job before retrying.
 """Persistent provider research jobs; retry polls the same paid job."""
 import asyncio
 import time

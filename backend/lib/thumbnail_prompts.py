@@ -62,7 +62,7 @@ Write public image metadata as neutral, factual editorial description. Do not me
 # ── Owner's thumbnail prompt format (27 Sep 2026) ────────────────────────────────────────────────────────────
 # ChatGPT creates the COMPLETE thumbnail poster, headline text included; the app never adds text to the image.
 # The SEO step returns article-specific content (thumbnail_headlines + thumbnail_design, in English); the app
-# fills the owner's exact template: Kannada headline text for the Kannada site, English for the English site.
+# fills the owner's exact template: Kannada headline text for Kannadiga, English for Human.
 import json
 import re
 

@@ -1,9 +1,4 @@
-"""Run the built UI and API on loopback, with a project-local MongoDB process.
-
-Ports can be changed with environment variables before starting (useful when 8001 or 27018 is already in use):
-    NEWSROOM_PORT        the app's port (default 8001)
-    NEWSROOM_MONGO_PORT  the local database port (default 27018)
-"""
+"""Run the built UI and API on loopback, with a project-local MongoDB process."""
 import json
 import os
 from pathlib import Path
@@ -17,9 +12,7 @@ import uuid
 import webbrowser
 
 ROOT = Path(__file__).resolve().parents[1]
-PORT = int(os.environ.get("NEWSROOM_PORT", "8001"))
-MONGO_PORT = int(os.environ.get("NEWSROOM_MONGO_PORT", "27018"))
-URL = f"http://127.0.0.1:{PORT}"
+URL = "http://127.0.0.1:8001"
 LOCAL = ROOT / ".local"
 
 
@@ -69,13 +62,13 @@ def stop_running_instance():
         return False
     (LOCAL / "stop.request").write_text(instance, encoding="utf-8")
     for _ in range(120):
-        if not port_open(PORT):
+        if not port_open(8001):
             break
         time.sleep(0.5)
     else:
         return False
     for _ in range(60):  # let it release the database it owns
-        if not port_open(MONGO_PORT):
+        if not port_open(27018):
             break
         time.sleep(0.5)
     return True
@@ -83,9 +76,9 @@ def stop_running_instance():
 
 def main():
     sync_extension()
-    if port_open(PORT):
+    if port_open(8001):
         if not open_existing():
-            raise SystemExit(f"Port {PORT} is occupied by another program. Close it, or start with NEWSROOM_PORT set to a free port.")
+            raise SystemExit("Port 8001 is occupied by another program. Close it and try again.")
         if not updated_since_start():
             print("Newsroom is already running at " + URL)
             if "--no-browser" not in sys.argv:
@@ -106,8 +99,8 @@ def main():
     load_dotenv(ROOT / "backend/.env")
     # Keep the isolated local database, while honoring the owner's explicit
     # workflow controls from backend/.env.
-    os.environ.update(MONGO_URL=f"mongodb://127.0.0.1:{MONGO_PORT}", DB_NAME="editorial_desktop",
-                      APP_URL=URL, CORS_ORIGINS=f"{URL},http://localhost:{PORT},http://127.0.0.1:3000",
+    os.environ.update(MONGO_URL="mongodb://127.0.0.1:27018", DB_NAME="editorial_desktop",
+                      APP_URL=URL, CORS_ORIGINS=URL + ",http://localhost:8001,http://127.0.0.1:3000",
                       LOCAL_SETUP_ENABLED="true")
     mongo_dir = LOCAL / "mongodb"
     mongo_dir.mkdir(parents=True, exist_ok=True)
@@ -116,13 +109,13 @@ def main():
     mongo = None
     instance = None
     control = MongoClient(os.environ["MONGO_URL"], serverSelectionTimeoutMS=1000)
-    if port_open(MONGO_PORT):
+    if port_open(27018):
         options = control.admin.command("getCmdLineOpts")
         configured = Path(options.get("parsed", {}).get("storage", {}).get("dbPath", "")).resolve()
         if configured != mongo_dir.resolve():
-            raise SystemExit(f"Port {MONGO_PORT} belongs to a different database. Stop that instance or start with NEWSROOM_MONGO_PORT set to a free port.")
+            raise SystemExit("Port 27018 belongs to a different database. Stop that instance or use separate development configuration.")
     else:
-        mongo = subprocess.Popen([str(binaries[0]), "--bind_ip", "127.0.0.1", "--port", str(MONGO_PORT),
+        mongo = subprocess.Popen([str(binaries[0]), "--bind_ip", "127.0.0.1", "--port", "27018",
                                   "--dbpath", str(mongo_dir), "--logpath", str(logs / "mongodb.log"), "--logappend"],
                                  creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
     done = threading.Event()
@@ -140,7 +133,7 @@ def main():
         sys.path.insert(0, str(ROOT / "backend"))
         instance = str(uuid.uuid4())
         (LOCAL / "runtime.json").write_text(json.dumps({"instance": instance, "url": URL}), encoding="utf-8")
-        server = uvicorn.Server(uvicorn.Config("server:app", host="127.0.0.1", port=PORT, access_log=False))
+        server = uvicorn.Server(uvicorn.Config("server:app", host="127.0.0.1", port=8001, access_log=False))
 
         def monitor():
             opened = "--no-browser" in sys.argv
