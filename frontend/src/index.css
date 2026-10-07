@@ -1,0 +1,357 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/noto-sans-kannada";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * News Room design system — "Navy & Amber" (light), drawn from the logo (owner, 5 Oct 2026).
+ * Deep navy #011B4B carries ink, structure and primary actions; warm amber #F59D1C is the single spark:
+ * hover, focus, the active marker, progress. Warm ivory paper keeps long reading and writing sessions calm.
+ *
+ * Token roles — every screen inherits the palette through these utility scales:
+ *   slate-*  neutral ink and paper (navy-tinted greys on ivory)
+ *   navy-*   brand navy: primary buttons, selected states, links (800 is the logo navy)
+ *   sky-*    informational tint of the navy: selected filters, info panels, in-progress stages
+ *   amber-*  brand amber (500 is the logo amber); also the held / needs-attention tone
+ * Site identity stays violet (Kannada site) and cyan (Human); rose/red means danger only.
+ * Text steps are tuned for WCAG AA on white and on the ivory canvas (slate-400+, sky-500+, amber-700+).
+ */
+@theme {
+    --color-slate-50: #f9f7f2;
+    --color-slate-100: #f2efe7;
+    --color-slate-200: rgb(1 27 75 / 0.1);
+    --color-slate-300: rgb(1 27 75 / 0.18);
+    --color-slate-400: #717990;
+    --color-slate-500: #5b647d;
+    --color-slate-600: #485169;
+    --color-slate-700: #343d56;
+    --color-slate-800: #222b46;
+    --color-slate-900: #131c39;
+    --color-slate-950: #0a122e;
+
+    --color-navy-50: #eef2fa;
+    --color-navy-100: #dde5f5;
+    --color-navy-200: #bccaea;
+    --color-navy-300: #8fa6d9;
+    --color-navy-400: #5c7bc0;
+    --color-navy-500: #3355a3;
+    --color-navy-600: #17398a;
+    --color-navy-700: #08276b;
+    --color-navy-800: #011b4b;
+    --color-navy-900: #011438;
+    --color-navy-950: #010c25;
+
+    --color-sky-50: #f1f5fc;
+    --color-sky-100: #e1e9f8;
+    --color-sky-200: #c5d3f0;
+    --color-sky-300: #9db4e3;
+    --color-sky-400: #6e8dd0;
+    --color-sky-500: #4266b8;
+    --color-sky-600: #264c9e;
+    --color-sky-700: #183b83;
+    --color-sky-800: #0f2c69;
+    --color-sky-900: #092052;
+    --color-sky-950: #051538;
+
+    --color-amber-50: #fff8ec;
+    --color-amber-100: #feefd2;
+    --color-amber-200: #fddda6;
+    --color-amber-300: #fbc670;
+    --color-amber-400: #f8ae3d;
+    --color-amber-500: #f59d1c;
+    --color-amber-600: #c8780b;
+    --color-amber-700: #a05c0a;
+    --color-amber-800: #814a0e;
+    --color-amber-900: #673b10;
+    --color-amber-950: #3b2007;
+
+    --shadow-paper: 0 1px 2px rgb(1 27 75 / 0.05), 0 12px 32px -16px rgb(1 27 75 / 0.16);
+    --shadow-lift: 0 2px 6px rgb(1 27 75 / 0.06), 0 22px 44px -18px rgb(1 27 75 / 0.26);
+    --shadow-glass: inset 0 1px 0 rgb(255 255 255 / 0.75), 0 1px 2px rgb(1 27 75 / 0.05), 0 10px 24px -14px rgb(1 27 75 / 0.3);
+}
+
+@theme inline {
+    /* Professional fonts only (owner, 27 Sep 2026): one premium sans for text, headings and figures;
+       Kannada glyphs from Noto Sans Kannada. No decorative faces. */
+    --font-sans: 'Geist Variable', 'Noto Sans Kannada Variable', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-heading: 'Geist Variable', 'Noto Sans Kannada Variable', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-serif: 'Geist Variable', 'Noto Sans Kannada Variable', 'Segoe UI', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+/* Navy & Amber — the live theme */
+:root {
+    --background: #f6f3ec;
+    --foreground: #131c39;
+    --card: #ffffff;
+    --card-foreground: #131c39;
+    --popover: #ffffff;
+    --popover-foreground: #131c39;
+    --primary: #011b4b;
+    --primary-foreground: #fdfbf6;
+    --secondary: #f2efe7;
+    --secondary-foreground: #131c39;
+    --muted: #f2efe7;
+    --muted-foreground: #485169;
+    /* Menu and list hover: a soft amber wash with navy text. */
+    --accent: #fef3dc;
+    --accent-foreground: #011b4b;
+    --destructive: #be2f4a;
+    --border: rgb(1 27 75 / 0.11);
+    --input: rgb(1 27 75 / 0.2);
+    --ring: #c8780b;
+    --radius: 0.75rem;
+    --sidebar: #fbf9f4;
+    --sidebar-foreground: #343d56;
+    --sidebar-primary: #011b4b;
+    --sidebar-primary-foreground: #fdfbf6;
+    --sidebar-accent: #fef3dc;
+    --sidebar-accent-foreground: #011b4b;
+    --sidebar-border: rgb(1 27 75 / 0.09);
+    --sidebar-ring: #c8780b;
+    --chart-1: #011b4b;
+    --chart-2: #f59d1c;
+    --chart-3: #2f9e74;
+    --chart-4: #7c3aed;
+    --chart-5: #be2f4a;
+    /* Site identity, used by [data-site] blocks. */
+    --site-kannadiga: #7c3aed;
+    --site-human: #0e7490;
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    html {
+        @apply font-sans;
+        color-scheme: light;
+        -webkit-text-size-adjust: 100%;
+        scroll-padding-top: 5.5rem;
+    }
+    body {
+        @apply bg-background text-foreground antialiased;
+        font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+        min-height: 100vh;
+        text-rendering: optimizeLegibility;
+        background-image:
+            radial-gradient(1100px 520px at 0% -10%, rgb(245 157 28 / 0.1), transparent 60%),
+            radial-gradient(1000px 560px at 100% -6%, rgb(23 57 138 / 0.1), transparent 62%),
+            radial-gradient(900px 700px at 50% 125%, rgb(1 27 75 / 0.06), transparent 60%);
+        background-attachment: fixed;
+    }
+    ::selection { background: rgb(245 157 28 / 0.32); color: #0a122e; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgb(1 27 75 / 0.16); border-radius: 999px; border: 2px solid transparent; background-clip: padding-box; }
+    ::-webkit-scrollbar-thumb:hover { background: rgb(1 27 75 / 0.3); background-clip: padding-box; border: 2px solid transparent; }
+
+    /* One visible keyboard focus for plain links and buttons; form controls add their own amber halo. */
+    :where(a, button, summary, select, [role="button"], [role="tab"], [role="switch"], [tabindex]):focus-visible {
+        outline: 2px solid var(--color-navy-600);
+        outline-offset: 2px;
+    }
+    h1, h2, h3 { text-wrap: balance; }
+    .font-heading { letter-spacing: -0.018em; }
+    /* Eyebrows and status chips: refined tracked sans instead of terminal-style mono caps. */
+    .font-mono.uppercase { font-family: var(--font-sans); font-weight: 550; letter-spacing: 0.14em; }
+
+    /* Kannada: Noto Sans Kannada with room for its tall conjuncts and vowel signs. */
+    .font-kannada {
+        font-family: 'Noto Sans Kannada Variable', 'Nirmala UI', 'Tunga', 'Geist Variable', system-ui, sans-serif;
+        line-height: 1.9;
+        letter-spacing: 0;
+        font-feature-settings: normal;
+    }
+    :lang(kn), [lang="kn"] { font-family: 'Noto Sans Kannada Variable', 'Nirmala UI', system-ui, sans-serif; letter-spacing: 0; }
+
+    /* Rendered WordPress article body: a comfortable long-form measure in both languages. */
+    .article-body { @apply text-slate-800; font-size: 1.0625rem; line-height: 1.8; text-wrap: pretty; overflow-wrap: anywhere; }
+    .article-body.font-kannada, .font-kannada .article-body, .article-body:lang(kn) { font-size: 1.09rem; line-height: 2.05; }
+    .article-body h2 { @apply font-heading font-semibold text-slate-950; font-size: 1.4rem; line-height: 1.3; margin: 2.2rem 0 0.6rem; }
+    .article-body h3 { @apply font-heading font-semibold text-slate-900; font-size: 1.15rem; line-height: 1.35; margin: 1.7rem 0 0.5rem; }
+    .article-body.font-kannada h2, .article-body.font-kannada h3 { line-height: 1.6; }
+    .article-body p { margin-bottom: 1.15em; }
+    .article-body ul { @apply list-disc pl-6 space-y-1.5 marker:text-amber-600; margin-bottom: 1.15em; }
+    .article-body ol { @apply list-decimal pl-6 space-y-1.5 marker:text-amber-700; margin-bottom: 1.15em; }
+    .article-body blockquote { @apply border-l-[3px] border-amber-400 pl-4 text-slate-700; margin: 1.4em 0; }
+    .article-body:not(.font-kannada) blockquote { font-style: italic; }
+    .article-body img { @apply rounded-lg; max-width: 100%; height: auto; }
+    .article-body table { @apply w-full text-sm overflow-hidden rounded-lg border border-slate-300; margin: 1.4em 0; line-height: 1.6; }
+    .article-body th { @apply bg-navy-50 font-semibold text-navy-900; }
+    .article-body th, .article-body td { @apply border border-slate-200 px-3 py-2 text-left align-top; }
+    .article-body tbody tr:nth-child(even) td { background: rgb(1 27 75 / 0.02); }
+    .article-body a { @apply text-navy-700 underline decoration-amber-400 underline-offset-4 hover:decoration-amber-600; }
+}
+
+@layer components {
+    /* White paper surface used by cards and panels. */
+    .surface {
+        background-color: rgb(255 255 255 / 0.94);
+        background-image: linear-gradient(180deg, rgb(255 255 255), rgb(255 255 255 / 0.88));
+        box-shadow: var(--shadow-paper);
+    }
+    /* Amber hover accent with a soft lift. */
+    .surface-hover { transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }
+    .surface-hover:hover {
+        border-color: rgb(245 157 28 / 0.6);
+        box-shadow: var(--shadow-lift), 0 0 0 1px rgb(245 157 28 / 0.16);
+        transform: translateY(-1px);
+    }
+    /* Brand accent text. .gold-text is the earlier name for the same thing. */
+    .brand-text, .gold-text {
+        background: linear-gradient(180deg, #f8ae3d, #f59d1c 55%, #c8780b);
+        -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hairline-top { position: relative; }
+    .hairline-top::before {
+        content: ""; position: absolute; inset: 0 28px auto 28px; height: 2px; border-radius: 2px;
+        background: linear-gradient(90deg, transparent, rgb(245 157 28 / 0.85), transparent);
+    }
+    /* Glass: the header, the sidebar and the selected navigation item. */
+    .glass {
+        background: rgb(250 248 243 / 0.74);
+        backdrop-filter: blur(18px) saturate(170%);
+        -webkit-backdrop-filter: blur(18px) saturate(170%);
+    }
+    .sidebar-glass {
+        background: linear-gradient(180deg, rgb(253 251 246 / 0.9), rgb(249 246 239 / 0.82));
+        backdrop-filter: blur(22px) saturate(160%);
+        -webkit-backdrop-filter: blur(22px) saturate(160%);
+    }
+    .glass-panel {
+        background: linear-gradient(180deg, rgb(255 255 255 / 0.86), rgb(255 255 255 / 0.6));
+        backdrop-filter: blur(14px) saturate(160%);
+        -webkit-backdrop-filter: blur(14px) saturate(160%);
+        border-color: rgb(255 255 255 / 0.85);
+        box-shadow: var(--shadow-glass), 0 0 0 1px rgb(1 27 75 / 0.06);
+    }
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .glass, .sidebar-glass { background: rgb(250 248 243 / 0.97); }
+        .glass-panel { background: #ffffff; }
+    }
+    .auth-hero { background: linear-gradient(155deg, #08276b 0%, #011b4b 46%, #010c25 100%); }
+
+    /* Page headings: one scale on every screen. */
+    .page-title {
+        @apply font-heading text-slate-950;
+        margin-top: 0.4rem;
+        font-size: clamp(1.5rem, 1.25rem + 0.9vw, 1.9rem);
+        font-weight: 620;
+        line-height: 1.15;
+        letter-spacing: -0.022em;
+    }
+    .page-lede { @apply text-slate-600; margin-top: 0.5rem; max-width: 46rem; font-size: 0.9375rem; line-height: 1.65; text-wrap: pretty; }
+
+    /* Article reading view. */
+    .reading-column { max-width: 46rem; margin-inline: auto; }
+    .article-headline { @apply font-heading text-slate-950; font-size: clamp(1.6rem, 1.3rem + 1vw, 2.05rem); font-weight: 620; line-height: 1.2; letter-spacing: -0.02em; }
+    .article-headline.font-kannada { line-height: 1.55; letter-spacing: 0; }
+    .article-dek { @apply text-slate-600; margin-top: 0.6rem; font-size: 1.125rem; line-height: 1.6; }
+    .article-dek.font-kannada { line-height: 1.9; }
+
+    /* Writing areas stay calm: flat paper, no gradients, no motion beyond a soft focus halo. */
+    .writing-area {
+        background: #ffffff;
+        border-color: rgb(1 27 75 / 0.18);
+        border-radius: 0.875rem;
+        padding: 1rem 1.125rem;
+        line-height: 1.75;
+        box-shadow: none;
+        transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    .writing-area:focus-visible { border-color: var(--color-navy-500); box-shadow: 0 0 0 4px rgb(245 157 28 / 0.18); }
+
+    /* Selected website: a ribbon in the site's own colour. */
+    [data-site="kannadiga"] { --site: var(--site-kannadiga); }
+    [data-site="human"] { --site: var(--site-human); }
+    .site-ribbon {
+        position: relative;
+        border: 1px solid rgb(1 27 75 / 0.1);
+        border-radius: 0.875rem;
+        padding: 0.875rem 1rem 0.95rem 1.25rem;
+        background: linear-gradient(90deg, color-mix(in srgb, var(--site, #011b4b) 7%, white), rgb(255 255 255 / 0.9) 55%);
+        overflow: hidden;
+    }
+    .site-ribbon::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--site, #011b4b); }
+    .site-dot { width: 0.55rem; height: 0.55rem; border-radius: 999px; background: var(--site, #011b4b); box-shadow: 0 0 0 3px color-mix(in srgb, var(--site, #011b4b) 20%, transparent); }
+
+    /* Restrained progress: a slim amber line while an action is in flight, a soft sheen on the active step. */
+    .progress-indeterminate { position: relative; height: 2px; overflow: hidden; background: rgb(245 157 28 / 0.16); }
+    .progress-indeterminate::after {
+        content: ""; position: absolute; inset: 0 auto 0 0; width: 28%;
+        background: linear-gradient(90deg, transparent, #f59d1c, transparent);
+        animation: progress-slide 1.6s cubic-bezier(.4, 0, .2, 1) infinite;
+    }
+    .progress-active {
+        background-image: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.6) 50%, transparent 100%);
+        background-size: 200% 100%;
+        animation: progress-sheen 2.4s linear infinite;
+    }
+
+    .skip-link {
+        position: fixed; left: 1rem; top: -4rem; z-index: 100;
+        @apply rounded-lg bg-navy-800 px-4 py-2 text-sm font-medium text-white;
+        transition: top .15s ease;
+    }
+    .skip-link:focus-visible { top: 0.75rem; outline-color: var(--color-amber-400); }
+}
+
+@keyframes soft-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+.animate-soft-pulse { animation: soft-pulse 2.4s ease-in-out infinite; }
+@keyframes progress-slide { 0% { transform: translateX(-110%); } 100% { transform: translateX(380%); } }
+@keyframes progress-sheen { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* Reduced motion: no decorative movement. Spinners stay, slowed, because they are the only "working" signal. */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .animate-spin { animation-duration: 1.8s !important; animation-iteration-count: infinite !important; }
+    .surface-hover:hover { transform: none; }
+    .progress-indeterminate::after { animation: none; width: 100%; opacity: 0.55; }
+    .progress-active { animation: none; background-image: none; }
+}

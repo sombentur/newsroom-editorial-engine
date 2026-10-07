@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Newsroom Bridge</title><link rel="stylesheet" href="popup.css"></head><body>
+<header><span class="mark">N</span><div><h1>Newsroom Browser Bridge</h1><p class="sub">Connects to the Newsroom app automatically</p></div></header>
+<div class="card"><div class="row"><span id="dot" class="dot"></span><strong id="connection">Checking…</strong></div><p id="status">Connecting…</p></div>
+<div class="card"><h2>Work tabs</h2><p id="workspace-status">Work tabs not connected</p>
+<div class="grid"><button id="show-research" class="ghost">Show Gemini tab</button><button id="show-image" class="ghost">Show ChatGPT tab</button></div></div>
+<button id="poll" class="primary">Continue / check connection</button>
+<div class="grid"><button id="open" class="ghost">Open job needing attention</button><button id="stop" class="danger">Stop job</button></div>
+<details><summary>Advanced</summary>
+<p>Only needed if automatic connection fails.</p>
+<label>Manual pairing code (from the app’s Browser Extension page)<input id="code" type="password" autocomplete="off"></label><button id="pair" class="ghost">Pair with code</button>
+<div class="grid"><button id="connect-workspace" class="ghost">Connect work tabs</button><button id="release-workspace" class="ghost">Release control</button></div>
+<button id="collect" class="ghost">Return selected research report</button>
+<label>Return downloaded landscape thumbnail<input id="image" type="file" accept="image/png,image/jpeg,image/webp"></label>
+</details>
+<p class="note">Keep Chrome and the Newsroom app running on this computer. Only the two work tabs this extension opens are controlled; your personal tabs are never used.</p>
+<script src="popup.js"></script></body></html>

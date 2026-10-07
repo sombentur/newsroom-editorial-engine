@@ -1,0 +1,59 @@
+# ---- Secrets and private configuration (never commit) ----
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+**/wp-credentials.key
+*token.json*
+*credentials.json*
+secrets/
+
+# ---- Databases, runtime state and logs ----
+.local/
+**/mongodb/
+*.log
+logs/
+dump.rdb
+*.sqlite
+*.db
+
+# ---- Installed dependencies and downloaded tools ----
+.venv/
+venv/
+node_modules/
+.tools/
+.cache/
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+
+# ---- Build output ----
+frontend/dist/
+dist/
+build/
+*.tsbuildinfo
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+pytest-cache-files-*/
+
+# ---- Editors and OS ----
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# ---- Archives ----
+*.zip
+*.tar
+*.tar.gz
+*.tgz

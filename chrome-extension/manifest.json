@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Newsroom Browser Bridge",
+  "version": "0.4.33",
+  "description": "Connect your local Newsroom app to dedicated Gemini and ChatGPT tabs.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "debugger",
+    "clipboardRead",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8001/*",
+    "https://gemini.google.com/*",
+    "https://chatgpt.com/*"
+  ],
+  "background": {
+    "service_worker": "worker.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://gemini.google.com/*",
+        "https://chatgpt.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "minimum_chrome_version": "120"
+}
